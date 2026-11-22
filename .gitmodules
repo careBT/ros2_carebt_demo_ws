@@ -1,0 +1,16 @@
+[submodule "src/carebt_core"]
+	path = src/carebt_core
+	url = git@github.com:careBT/carebt_core.git
+	branch = main
+[submodule "src/carebt_ros2"]
+	path = src/carebt_ros2
+	url = git@github.com:careBT/carebt_ros2.git
+	branch = kilted
+[submodule "src/Stage"]
+	path = src/Stage
+	url = git@github.com:careBT/Stage.git
+	branch = ros2
+[submodule "src/stage_ros2"]
+	path = src/stage_ros2
+	url = git@github.com:careBT/stage_ros2.git
+	branch = jazzy

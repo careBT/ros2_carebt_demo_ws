@@ -1,0 +1,40 @@
+// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+{
+	"name": "carebt_stage_ws (ROS 2 kilted)",
+	"dockerFile": "Dockerfile",
+	"build": {
+		"args": {
+			"WORKSPACE": "${containerWorkspaceFolder}"
+		}
+	},
+	"remoteUser": "ros",
+	"runArgs": [
+		"--network=host",
+		"-e DISPLAY=$DISPLAY",
+		"--cap-add=SYS_PTRACE",
+		"--security-opt=seccomp:unconfined",
+		"--security-opt=apparmor:unconfined",
+		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
+		"--device=/dev/dri:/dev/dri"
+	],
+	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}" },
+	// carebt_core is a plain python package (no package.xml), so it is installed editable
+	"postCreateCommand": "sudo apt-get update && rosdep update && rosdep install --from-paths src --ignore-src -r -y --skip-keys owlready2 && pip3 install --break-system-packages -e src/carebt_core",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.profiles.linux": {
+					"bash": {
+						"path": "bash"
+					}
+				},
+				"terminal.integrated.defaultProfile.linux": "bash"
+			},
+			"extensions": [
+				"ms-python.python",
+				"ms-vscode.cpptools",
+				"ms-iot.vscode-ros"
+			]
+		}
+	}
+}
